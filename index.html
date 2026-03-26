@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LE RIVET - ARCHIVE INFINIE</title>
+    <style>
+        body { font-family: 'Arial Black', sans-serif; background: #000; color: #fff; text-align: center; padding: 10px; margin: 0; overflow: hidden; }
+        .card { background: #111; border: 5px solid #ff4d4d; border-radius: 30px; max-width: 480px; margin: 20px auto; padding: 30px; min-height: 420px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 0 50px rgba(255, 77, 77, 0.7); cursor: pointer; border-top: 20px solid #ff4d4d; position: relative; }
+        .text { font-size: 24px; line-height: 1.3; text-transform: uppercase; word-wrap: break-word; }
+        .hl { color: #ff4d4d; text-shadow: 0 0 10px #ff4d4d; font-weight: bold; }
+        .num { color: #00d4ff; font-size: 38px; font-weight: bold; }
+        .fun { color: #00ff88; font-size: 30px; text-shadow: 0 0 15px #00ff88; font-weight: 900; }
+        .cul-sec { color: #ffcc00; font-size: 42px; text-shadow: 0 0 25px #ffcc00; animation: flash 0.5s infinite alternate; font-weight: 900; }
+        @keyframes flash { from { opacity: 0.3; } to { opacity: 1; } }
+        .hidden { display: none; }
+        input { padding: 18px; width: 80%; border-radius: 12px; border: 2px solid #444; font-size: 18px; margin-bottom: 15px; background: #151515; color: #fff; }
+        button { background: #ff4d4d; color: #fff; border: none; padding: 22px; border-radius: 15px; font-weight: bold; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 18px; box-shadow: 0 5px 0 #800; }
+        button:active { transform: translateY(3px); box-shadow: none; }
+        #count { margin-top: 25px; font-size: 14px; color: #555; letter-spacing: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1 style="color:#ff4d4d; letter-spacing: 8px; margin-top: 20px; text-shadow: 2px 2px #333;">LE RIVET</h1>
+
+    <div id="setup">
+        <div class="card" style="min-height: 300px; cursor: default;">
+            <h2 style="font-size: 20px; color: #00d4ff; margin-bottom: 20px;">ENTREZ LES VICTIMES</h2>
+            <input type="text" id="p-in" placeholder="Prénom..." onkeypress="if(event.key==='Enter') addP()">
+            <button onclick="addP()">AJOUTER</button>
+            <div id="p-list" style="margin: 20px 0; font-size: 18px; color: #ffcc00; font-weight: bold; min-height: 30px;"></div>
+            <button onclick="start()" id="btn-go" class="hidden" style="background:#00d4ff; color:#000; box-shadow: 0 5px 0 #008eb3;">LANCER (35 CARTES) 🔥</button>
+        </div>
+    </div>
+
+    <div id="game" class="hidden">
+        <div class="card" onclick="draw()">
+            <div id="content" class="text">Appuie pour la première claque...</div>
+            <div id="count">0 / 35</div>
+        </div>
+    </div>
+
+    <script>
+        let players = [];
+        let finalDeck = [];
+        let step = 0;
+
+        function addP() {
+            let v = document.getElementById('p-in').value.trim();
+            if(v) {
+                players.push(v);
+                document.getElementById('p-list').innerHTML += v + " • ";
+                document.getElementById('p-in').value = "";
+                if(players.length >= 2) document.getElementById('btn-go').classList.remove('hidden');
+            }
+        }
+
+        function createDeck() {
+            const normalActions = [
+                // CLASSIQUES
+                "{J1}, bois {N} pour ta gueule.", "{J1}, distribue {N}.", "Les jeans boivent {N}.", "Si tu as un iPhone, bois {N}.", 
+                "Chifoumi entre {J1} et {J2}. Perdant : {N}.", "Dernier qui touche ses pieds : {N}.", "Règle pour {J1} : si tu dis un prénom, bois {N}.",
+                "Le plus petit boit {N}.", "{J1} et {J2} trinquent et boivent {N}.", "Dernier qui crie 'RIVET' : {N}.", 
+                "{J1}, donne {N} à gauche.", "Moins de 50% de batterie : {N}.", "Chaussettes blanches : {N}.", 
+                "Duel de pouces {J1} vs {J2} : {N}.", "Le plus sobre rattrape : {N}.", "Tatouage ? Bois {N}. Sinon donne {N}.",
+                "Ceux qui ont des lunettes boivent {N}.", "Ceux qui font plus de 1m80 : {N}.", "Signe astro de {J1} : {N}.",
+                // VOTES
+                "VOTE : Le plus bordélique boit {N}.", "VOTE : Le plus riche donne {N}.", "VOTE : Le plus gros menteur boit {N}.",
+                "VOTE : Le plus drôle distribue {N}.", "VOTE : Qui finit en premier au lit ? Il boit {N}.",
+                // REELLEMENT NOUVELLES
+                "Ceux qui sont nés un mois pair boivent {N}.", "{J1}, montre ta dernière photo. Si le groupe juge, bois {N}.",
+                "Le dernier qui touche une porte boit {N}.", "Si tu as déjà vomi en soirée cette année, bois {N}.",
+                "{J1}, cite 3 ex en 5 secondes ou bois {N2}.", "Le joueur qui a le plus de clés sur lui donne {N}.",
+                "Si tu portes une montre, distribue {N}.", "Ceux qui n'ont pas de permis boivent {N}.",
+                "{J1}, fais un compliment à {J2} ou bois {N}.", "Le dernier qui imite un singe boit {N}.",
+                "Celui qui a le plus de poils aux bras donne {N}.", "{J1}, bois {N} si tu as déjà utilisé Tinder.",
+                "Ceux qui ont mangé un fast-food aujourd'hui boivent {N}.", "Le dernier qui croise les bras boit {N}.",
+                "{J1}, donne {N} à celui qui a les yeux les plus sombres.", "{J1}, bois {N} par année d'études après le bac (max 5).",
+                "Si tu as un grand écran sur ton tel, bois {N}.", "Ceux qui portent des bijoux boivent {N}.",
+                "{J1}, cite 3 capitales en 5s ou bois {N}.", "Le dernier qui ferme les yeux boit {N}.",
+                "Si tu as déjà pleuré devant un film, bois {N}.", "Ceux qui préfèrent la bière au vin boivent {N}.",
+                "{J1}, bois {N} si tu sais cuisiner des pâtes carbonara.", "{J1}, distribue {N} à ceux qui portent du bleu.",
+                "Le dernier qui touche ses genoux boit {N}.", "{J1}, bois {N} si tu as déjà menti à tes parents ce mois-ci."
+            ];
+
+            const funActions = [
+                "<span class='fun'>DÉFI :</span> {J1}, fais la poule sur ta chaise !",
+                "<span class='fun'>DÉFI :</span> {J1}, raconte ta pire honte.",
+                "<span class='fun'>GAGE :</span> {J1}, finis la partie sans tes chaussures.",
+                "<span class='fun'>DÉFI :</span> {J1}, déclare ta flamme à {J2}.",
+                "<span class='fun'>GAGE :</span> {J1}, appelle quelqu'un et dis 'Rivet'.",
+                "<span class='fun'>DÉFI :</span> {J1}, imite un accent jusqu'au prochain tour.",
+                "<span class='fun'>DÉFI :</span> {J1}, touche ton nez avec ton orteil.",
+                "<span class='fun'>GAGE :</span> {J1}, {J2} change ton nom sur tes réseaux.",
+                "<span class='fun'>DÉFI :</span> {J1}, fais l'avion autour de la table.",
+                "<span class='fun'>DÉFI :</span> {J1}, fais 10 pompes.",
+                "<span class='fun'>GAGE :</span> {J1}, interdiction de parler jusqu'à ce qu'on te pose une question.",
+                "<span class='fun'>DÉFI :</span> {J1}, chante le refrain d'une chanson connue.",
+                "<span class='fun'>GAGE :</span> {J1}, donne ton téléphone à {J2} pour 2 minutes.",
+                "<span class='fun'>DÉFI :</span> {J1}, tiens en équilibre sur une jambe 1 minute.",
+                "<span class='fun'>DÉFI :</span> {J1}, essaye de faire rire le groupe en 30s sans parler."
+            ];
+
+            const culSecs = [
+                "FATALITÉ : {J1}, <span class='cul-sec'>CUL SEC !</span>",
+                "DÉLUGE : {J2}, <span class='cul-sec'>CUL SEC !</span>",
+                "LE RIVET FRAPPE : {J3}, <span class='cul-sec'>CUL SEC !</span>"
+            ];
+
+            // 1. Mélange et sélection précise
+            let deck = normalActions.sort(() => 0.5 - Math.random()).slice(0, 27);
+            let funs = funActions.sort(() => 0.5 - Math.random()).slice(0, 7);
+            let cs = culSecs[Math.floor(Math.random() * culSecs.length)];
+
+            finalDeck = deck.concat(funs, cs).sort(() => 0.5 - Math.random());
+        }
+
+        function start() {
+            createDeck();
+            document.getElementById('setup').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            draw();
+        }
+
+        function draw() {
+            if(step >= 35) {
+                document.getElementById('content').innerHTML = "🏁 FIN DE LA PARTIE.<br><br><button onclick='location.reload()'>REJOUER</button>";
+                document.getElementById('count').innerText = "35 / 35";
+                return;
+            }
+            let p = [...players].sort(() => 0.5 - Math.random());
+            let n = Math.floor(Math.random() * 5) + 2; 
+            let raw = finalDeck[step];
+            let processed = raw.replace(/{J1}/g, '<span class="hl">'+p[0]+'</span>')
+                               .replace(/{J2}/g, '<span class="hl">'+(p[1]||p[0])+'</span>')
+                               .replace(/{J3}/g, '<span class="hl">'+(p[2]||p[0])+'</span>')
+                               .replace(/{N}/g, '<span class="num">'+n+'</span>')
+                               .replace(/{N2}/g, '<span class="num">'+(n*2)+'</span>');
+            document.getElementById('content').innerHTML = processed;
+            document.getElementById('count').innerText = (step + 1) + " / 35";
+            step++;
+        }
+    </script>
+</body>
+</html>
