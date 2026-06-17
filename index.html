@@ -3,50 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LE RIVET - L'ÉQUILIBRE PARFAIT</title>
+    <title>LE RIVET - MISSION GALACTIQUE</title>
     <link rel="apple-touch-icon" href="icone.png">
     <link rel="icon" type="image/png" href="icone.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Le Rivet">
     <style>
-        body { font-family: 'Arial Black', sans-serif; background: #000; color: #fff; text-align: center; padding: 10px; margin: 0; overflow: hidden; }
-        .card { background: #111; border: 5px solid #ff4d4d; border-radius: 30px; max-width: 480px; margin: 20px auto; padding: 30px; min-height: 440px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 0 50px rgba(255, 77, 77, 0.7); cursor: pointer; border-top: 20px solid #ff4d4d; position: relative; }
-        .text { font-size: 22px; line-height: 1.4; text-transform: uppercase; word-wrap: break-word; }
-        .hl { color: #ff4d4d; text-shadow: 0 0 10px #ff4d4d; font-weight: bold; }
-        .num { color: #00d4ff; font-size: 38px; font-weight: bold; }
-        .fun { color: #00ff88; font-size: 30px; text-shadow: 0 0 15px #00ff88; font-weight: 900; }
-        .cumul { color: #ff00ff; font-size: 28px; text-shadow: 0 0 15px #ff00ff; font-weight: 900; }
-        .sauce { color: #ff3300; font-size: 32px; text-shadow: 0 0 20px #ff3300; font-weight: 900; animation: pulse 0.8s infinite alternate; }
-        .cul-sec { color: #ffcc00; font-size: 42px; text-shadow: 0 0 25px #ffcc00; animation: flash 0.5s infinite alternate; font-weight: 900; }
-        .shot { color: #ff0055; font-size: 36px; text-shadow: 0 0 20px #ff0055; font-weight: 900; animation: flash 0.3s infinite alternate; }
-        @keyframes flash { from { opacity: 0.4; } to { opacity: 1; } }
-        @keyframes pulse { from { transform: scale(0.98); } to { transform: scale(1.02); } }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap');
+
+        body { 
+            font-family: 'Share Tech Mono', monospace; 
+            background-color: #020617; 
+            background-image: 
+                radial-gradient(at 50% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                linear-gradient(rgba(14, 165, 233, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            color: #e2e8f0; 
+            text-align: center; 
+            padding: 15px; 
+            margin: 0; 
+            overflow: hidden; 
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #f8fafc;
+            letter-spacing: 6px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+            font-size: 32px;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            color: #0ea5e9;
+            font-size: 12px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .card { 
+            background: rgba(15, 23, 42, 0.8); 
+            border: 2px solid #0ea5e9; 
+            border-radius: 20px; 
+            max-width: 450px; 
+            margin: 0 auto; 
+            padding: 25px; 
+            min-height: 460px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            box-shadow: 0 0 40px rgba(14, 165, 233, 0.25), inset 0 0 20px rgba(14, 165, 233, 0.1); 
+            cursor: pointer; 
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before, .card::after {
+            content: ''; position: absolute; width: 15px; height: 15px; border-color: #f97316; border-style: solid; pointer-events: none;
+        }
+        .card::before { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+        .card::after { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+        .text { font-size: 21px; line-height: 1.5; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .hl { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); font-weight: bold; font-family: 'Orbitron', sans-serif; }
+        .num { color: #f43f5e; font-size: 34px; font-weight: bold; font-family: 'Orbitron', sans-serif; }
+        
+        .fun { color: #a855f7; font-size: 26px; font-family: 'Orbitron', sans-serif; font-weight: 900; text-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
+        .cumul { color: #eab308; font-size: 25px; font-family: 'Orbitron', sans-serif; font-weight: 900; }
+        .sauce { color: #34d399; font-size: 26px; font-family: 'Orbitron', sans-serif; font-weight: 900; text-shadow: 0 0 15px rgba(52, 211, 153, 0.4); }
+        
+        .shot { color: #f97316; font-size: 36px; font-family: 'Orbitron', sans-serif; font-weight: 900; text-shadow: 0 0 25px #f97316; animation: pulse 0.6s infinite alternate; }
+        .cul-sec { color: #ef4444; font-size: 38px; font-family: 'Orbitron', sans-serif; font-weight: 900; text-shadow: 0 0 30px #ef4444; animation: pulse 0.3s infinite alternate; }
+
+        @keyframes pulse { from { transform: scale(0.96); opacity: 0.8; } to { transform: scale(1.04); opacity: 1; } }
+        
         .hidden { display: none; }
-        input { padding: 18px; width: 80%; border-radius: 12px; border: 2px solid #444; font-size: 18px; margin-bottom: 15px; background: #151515; color: #fff; }
-        button { background: #ff4d4d; color: #fff; border: none; padding: 22px; border-radius: 15px; font-weight: bold; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 18px; box-shadow: 0 5px 0 #800; }
-        button:active { transform: translateY(3px); box-shadow: none; }
-        #count { margin-top: 25px; font-size: 14px; color: #555; letter-spacing: 3px; }
+        
+        input { 
+            padding: 16px; width: 85%; border-radius: 8px; border: 1px solid #334155; 
+            font-size: 18px; margin-bottom: 15px; background: #0f172a; color: #fff; 
+            font-family: 'Share Tech Mono', monospace; text-align: center; text-transform: uppercase;
+        }
+        input:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+        
+        button { 
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: #fff; 
+            border: none; padding: 20px; border-radius: 8px; font-family: 'Orbitron', sans-serif; 
+            font-weight: bold; cursor: pointer; width: 100%; text-transform: uppercase; 
+            font-size: 18px; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); transition: all 0.2s;
+        }
+        button:active { transform: scale(0.98); box-shadow: none; }
+        
+        .launch-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+        #count { margin-top: 20px; font-size: 13px; color: #64748b; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <h1 style="color:#ff4d4d; letter-spacing: 8px; margin-top: 20px; text-shadow: 2px 2px #333;">LE RIVET</h1>
+    <h1>LE RIVET</h1>
+    <div class="subtitle">CORPS EXPÉDITIONNAIRE</div>
 
     <div id="setup">
-        <div class="card" style="min-height: 300px; cursor: default;">
-            <h2 style="font-size: 20px; color: #00d4ff; margin-bottom: 20px;">ZONE DE SÉCURITÉ : ENRÔLEMENT</h2>
-            <input type="text" id="p-in" placeholder="Prénom..." onkeypress="if(event.key==='Enter') addP()">
-            <button onclick="addP()">AJOUTER</button>
-            <div id="p-list" style="margin: 20px 0; font-size: 18px; color: #ffcc00; font-weight: bold; min-height: 30px;"></div>
-            <button onclick="start()" id="btn-go" class="hidden" style="background:#00d4ff; color:#000; box-shadow: 0 5px 0 #008eb3;">GÉNÉRER LE MIX PARFAIT 🔥</button>
+        <div class="card" style="min-height: 320px; cursor: default;">
+            <div style="font-size: 16px; color: #0ea5e9; margin-bottom: 20px; letter-spacing: 2px;">ENREGISTREMENT DE L'ÉQUIPAGE</div>
+            <input type="text" id="p-in" placeholder="IDENTIFIANT MEMBRE..." onkeypress="if(event.key==='Enter') addP()">
+            <button onclick="addP()">ENRÔLER</button>
+            <div id="p-list" style="margin: 20px 0; font-size: 16px; color: #eab308; font-weight: bold; min-height: 30px; letter-spacing: 1px;"></div>
+            <button onclick="start()" id="btn-go" class="hidden launch-btn">PRÊT À DÉCOLLER 🚀</button>
         </div>
     </div>
 
     <div id="game" class="hidden">
         <div class="card" onclick="draw()">
-            <div id="content" class="text">Préparation de la session... Cliquez.</div>
-            <div id="count">0 / 35</div>
+            <div id="content" class="text">Initialisation des systèmes... Touchez l'écran.</div>
+            <div id="count">SYSTEM READY</div>
         </div>
     </div>
 
@@ -68,115 +152,111 @@
 
         function createDeck() {
             step = 0;
-            if (players.length > 3) {
-                totalCardsInGame = 35 + ((players.length - 3) * 5);
-            } else {
-                totalCardsInGame = 35;
-            }
+            totalCardsInGame = players.length > 3 ? 35 + ((players.length - 3) * 5) : 35;
 
+            // TIROIR 1 : LES SHOOTERS (Propres et percutants)
             const deckShooters = [
-                "ALERTE GÉNÉRALE : Le dernier qui crie 'RIVET' prend un <span class='shot'>SHOOTER</span> pur d'office !",
-                "CRIME DE SOBRIÉTÉ : {J1}, tu as l'air beaucoup trop lucide. Prépare et prends un <span class='shot'>SHOOTER</span> immédiatement.",
-                "LE JEU DU SHOT : {J1} fait un chifoumi contre {J2}. Le perdant s'enfile un <span class='shot'>SHOOTER</span> sec.",
-                "SENTENCE DU DESIGNER : Si tu as du blanc sur tes chaussures, le destin t'as choisi : prends un <span class='shot'>SHOOTER</span>.",
-                "VOTE SANCTION : Vote général. Qui capitulera en premier ce soir ? Le plus visé prend un <span class='shot'>SHOOTER</span> cul-sec.",
-                "LE SHOT DU DESTIN : Si tu es assis à la gauche de {J1}, prépare un <span class='shot'>SHOOTER</span> et bois-le maintenant.",
-                "SÉLECTION AVEUGLE : Tout le monde ferme les yeux. {J1} pointe discrètement quelqu'un du doigt. La victime boit un <span class='shot'>SHOOTER</span> sans savoir qui l'a dénoncée."
+                "ALERTE RUPTURE DE STOCK : Le dernier membre d'équipage qui touche le plafond prend un <span class='shot'>SHOOTER</span>.",
+                "CONDUITE À RISQUE : {J1} est suspecté de sobriété illégale. Prépare et prends un <span class='shot'>SHOOTER</span>.",
+                "DUEL AMORTI : {J1} provoque {J2} au chifoumi. Le perdant boit un <span class='shot'>SHOOTER</span> de punition.",
+                "RECONNAISSANCE BIOMÉTRIQUE : Si tu portes des chaussures claires, le système te verrouille : prends un <span class='shot'>SHOOTER</span>.",
+                "EVALUATION DU COCKPIT : Vote à trois. Qui est le plus proche du crash ce soir ? Le vainqueur encaisse un <span class='shot'>SHOOTER</span>.",
+                "PANNE HYDROLIQUE : Le joueur placé immédiatement à la gauche de {J1} doit vider un <span class='shot'>SHOOTER</span>.",
+                "INFILTRATION : Tout le monde ferme les yeux. {J1} désigne un suspect du doigt. À l'ouverture, la cible prend un <span class='shot'>SHOOTER</span> sans connaître l'auteur.",
+                "RADAR EMBARQUÉ : Le joueur qui a le plus petit niveau de liquide dans son verre prend un <span class='shot'>SHOOTER</span> pour équilibrer."
             ].sort(() => 0.5 - Math.random());
 
+            // TIROIR 2 : PROTOCOLES COLLECTIFS
             const deckSauce = [
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>TOUR DE MANÈGE !</span> {J1} commence à boire, puis son voisin de droite s'y met, puis le suivant... On ne s'arrête que si son voisin de gauche a posé son verre !",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>ROI DU SILENCE !</span> Le premier qui parle ou émet un bruit prend <span class='num'>4</span> gorgées. {J1} gère la fin du silence.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>LE CHEF D'ORCHESTRE !</span> {J1} doit faire des gestes discrets. Tout le monde doit l'imiter. Le dernier prend <span class='num'>4</span> gorgées !",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> Tout le monde pointe du doigt la personne la plus bordélique. La cible prend autant de gorgées que de votes contre elle.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>SÉCURITÉ ROUTIÈRE !</span> Tout le monde mime un conducteur. Le dernier qui met ses deux mains sur son volant imaginaire prend <span class='num'>3</span> gorgées.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>L'AVALANCHE !</span> Tout le monde lève son verre. On boit tous ensemble en continu pendant <span class='num'>5</span> secondes.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> Vote général : Qui est le plus susceptible de se faire virer d'une boîte ce soir ? Le gagnant boit {N} gorgées.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>NÉGOCIATION !</span> Mettez-vous d'accord en moins de 15 secondes sur une cible unique pour <span class='num'>5</span> gorgées. Si pas d'accord, tout le monde boit <span class='num'>3</span>.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>LE NAUTILE !</span> Tout le monde doit toucher le sol avec sa main droite. Le dernier prend <span class='num'>4</span> gorgées.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>L'ÉGALITÉ !</span> Ceux qui ont le verre le plus rempli doivent boire pour s'aligner sur le niveau du verre le plus vide.",
-                "<span class='sauce'>TOUS DANS LA SAUCE :</span> <span class='hl'>LE CRASH !</span> Tout le monde doit mimer un avion. Le dernier qui décolle ses bras prend <span class='num'>3</span> gorgées."
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>VORTEX CINETIQUE !</span> {J1} commence à boire, son voisin de droite embraye, puis le suivant... Interdiction de poser son verre tant que ton repère de gauche boit !",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>DEPRESSURISATION COCKPIT !</span> Silence radio total. Le premier qui produit un son ou rit écope de <span class='num'>4</span> gorgées. {J1} valide le retour à la normale.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>TRANSMISSION MIROIR !</span> {J1} devient le commandant de bord. Chaque geste qu'il exécute doit être copié. Le dernier équipier à la traîne prend <span class='num'>4</span> gorgées.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> Désignez tous du doigt le passager le plus indiscipliné de la navette. La cible absorbe autant de gorgées que de votes reçus.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>GRAVITÉ ZÉRO !</span> Tout le monde doit lever les deux pieds du sol. Le dernier équipier en contact avec la terre ferme prend <span class='num'>3</span> gorgées.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>HYPERPROPULSION !</span> Tout le monde lève sa réserve. On consomme tous ensemble en continu pendant <span class='num'>5</span> secondes.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> Vote de bord : Qui risque de se faire éjecter du sas en premier ce soir ? Le condamné boit {N} gorgées.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>CONCORDANCE DES SYSTÈMES !</span> Ceux qui possèdent le niveau de réservoir le plus haut boivent jusqu'à s'aligner sur le niveau le plus bas.",
+                "<span class='sauce'>ALERTE INTEGRALE :</span> <span class='hl'>ALERTE IMPACT !</span> Tout le monde se protège la tête avec les deux mains. Le dernier officier en position prend <span class='num'>4</span> gorgées."
             ].sort(() => 0.5 - Math.random());
 
+            // TIROIR 3 : REGLES RADICALES DE VOL (Gages)
             const deckRegles = [
-                "<span class='fun'>RÈGLE STRICTE :</span> {J1} n'a plus le droit de dire un seul GROS MOT jusqu'à la fin du jeu. S'il se loupe, le groupe lui écrit le mot SUR LE BRAS AU FEUTRE et il prend <span class='num'>2</span> gorgées.",
-                "<span class='fun'>GAGE OBLIGATOIRE :</span> {J1} devient le serveur officiel. C'est lui qui remplit les verres de tout le monde dès qu'ils se vident, jusqu'à la fin de la partie.",
-                "<span class='fun'>RÈGLE INFIRMIÈRE :</span> Interdiction de toucher à son téléphone portable. Le premier qui regarde son écran boit <span class='num'>4</span> gorgées.",
-                "<span class='fun'>GAGE ACCENT :</span> {J1} doit parler avec un accent étranger au choix jusqu'au prochain tour complet. Oubli ou raté = <span class='num'>3</span> gorgées.",
-                "<span class='fun'>RÈGLE DU PRÉNOM :</span> {J2} ne doit plus prononcer aucun prénom. S'il l'oublie, il boit <span class='num'>2</span> à chaque fois.",
-                "<span class='fun'>RÈGLE DU TUTOIEMENT :</span> {J1} doit vouvoyer tout le monde. S'il lâche un 'tu', il prend <span class='num'>2</span> gorgées.",
-                "<span class='fun'>GAGE T-REX :</span> {J1} doit boire toutes ses gorgées en gardant les coudes collés au corps comme un dinosaure jusqu'à la fin.",
-                "<span class='fun'>RÈGLE DE LA MAIN :</span> Tout le monde doit tenir son verre avec sa mauvaise main. Erreur constatée = <span class='num'>2</span> gorgées."
+                "<span class='fun'>AVARIE DE COMM :</span> {J1} subit un brouillage d'ondes : aucun GROS MOT toléré sous peine de prendre <span class='num'>2</span> gorgées et de voir le mot inscrit AU FEUTRE SUR SON BRAS par l'équipage.",
+                "<span class='fun'>PROTOCOLE INTENDANCE :</span> {J1} est nommé ingénieur de maintenance des verres. C'est lui qui sert tout le monde jusqu'à la fin de la mission.",
+                "<span class='fun'>CONCORDANCE DATA :</span> Verrouillage cybernétique. Interdiction de toucher à son téléphone. Le premier qui rompt la règle prend <span class='num'>4</span> gorgées.",
+                "<span class='fun'>SÉJOUR ORBITAL :</span> {J1} doit adopter un accent extraterrestre ou étranger crédible jusqu'à la fin de la boucle. Tout oubli coûte <span class='num'>3</span> gorgées.",
+                "<span class='fun'>CRYPTAGE NOMINAL :</span> {J2} n'a plus le droit de citer un seul prénom de la table. Erreur d'aiguillage = <span class='num'>2</span> gorgées.",
+                "<span class='fun'>FORMALISME SPATIAL :</span> {J1} doit vouvoyer l'intégralité de la station sous peine de prendre <span class='num'>2</span> gorgées par infraction.",
+                "<span class='fun'>ATROPHIE MUSCULAIRE :</span> Effet de la gravité : {J1} doit consommer toutes ses gorgées avec les coudes bloqués contre ses flancs jusqu'à la fin de la partie.",
+                "<span class='fun'>INVERSION DES COMMANDES :</span> Tout le monde saisit son verre de la main non-dominante. Alerte non-respect = <span class='num'>2</span> gorgées."
             ].sort(() => 0.5 - Math.random());
 
+            // TIROIR 4 : DILEMMES RETORS CORRIGÉS (Fini les choix gratuits !)
+            const deckDilemmes = [
+                "<span class='fun'>CHOIX DE TRAJECTOIRE :</span> {J1}, soit tu subis <span class='num'>4</span> gorgées de carburant en solo, soit tu imposes <span class='num'>6</span> gorgées à {J2}... mais tu as l'obligation d'en boire la moitié (<span class='num'>3</span>) avec lui.",
+                "<span class='fun'>SACRIFICE DE BORD :</span> {J1}, soit tu prends <span class='num'>3</span> gorgées d'office, soit tu obliges {J2} à boire... mais tu prends exactement la même dose que lui.",
+                "<span class='fun'>SÉCURITÉ CORROMPUE :</span> {J1}, donne ton téléphone à {J2} qui lit ton dernier message reçu. Si tu refuses, la station vous inflige <span class='num'>4</span> gorgées CHACUN.",
+                "<span class='fun'>PARTAGE DES CHARGES :</span> {J1}, distribue <span class='num'>5</span> gorgées à qui tu veux. Seul problème : tu dois boire le double (<span class='num'>10</span>) pour valider le transfert de cargaison.",
+                "<span class='fun'>PILOTAGE SANS SÉCURITÉ :</span> {J1}, soit tu lances un chifoumi contre {J2} (le perdant prend <span class='num'>5</span>), soit vous abandonnez le duel et vous prenez <span class='num'>3</span> chacun sans discuter.",
+                "<span class='fun'>ESQUIVE COÛTEUSE :</span> {J1}, distribue un <span class='shot'>SHOOTER</span> à la personne de ton choix. Si la victime l'accepte, ton réservoir se fissure : tu dois immédiatement vider la moitié de ton propre verre en échange."
+            ].sort(() => 0.5 - Math.random());
+
+            // TIROIR 5 : SENTENCES CHRONO (100% variées pour éliminer les répétitions)
             const deckDirectes = [
-                "Tous ceux qui ont une cigarette allumée, un vapo ou un briquet à la main boivent {N} gorgées.",
-                "Si tu as moins de 50% de batterie sur ton téléphone, prends {N} gorgées d'office.",
-                "Tant pis pour toi {J1}, le sort t'a choisi au pif : tu prends {N} gorgées gratuites.",
-                "Regardez vos verres. Celui qui a le verre le plus vide boit {N} ou prend un cul-sec pour se remettre à niveau.",
-                "Si tu as du noir sur tes fringues, prends {N} gorgées.",
-                "Ceux qui ont un iPhone boivent {N}. Les autres distribuent 2 gorgées.",
-                "Le plus grand en taille de la pièce distribue {N} gorgées, le plus petit les boit.",
-                "Si tu as déjà pris une amende ou perdu des points sur ton permis, bois {N}.",
-                "Ceux qui portent des bijoux visibles boivent {N}.",
-                "Si tu as les yeux clairs, bois {N}. Si tu as les yeux marrons ou noirs, donne {N}.",
-                "La personne assise le plus près de la porte boit {N}.",
-                "Ceux qui boivent de l'alcool fort boivent {N}. Les buveurs de bière distribuent {N}.",
-                "Le joueur qui a envoyé le dernier message sur son téléphone prend {N} gorgées.",
-                "Si tu es en couple, distribue {N} gorgées. Si tu es célibataire, bois-les.",
-                "Le premier qui rigole à partir de maintenant prend {N} gorgées.",
-                "Ceux qui portent un jean boivent {N}.",
-                "Si tu as les cheveux attachés ou un couvre-chef, prends {N} gorgées.",
-                "Le joueur qui s'est réveillé le plus tard ce matin distribue {N} gorgées.",
-                "Si tu as plus de 2 clés sur ton trousseau de clés, bois {N}.",
-                "Ceux qui portent des chaussettes noires boivent {N}.",
-                "Si tu as une application de rencontre installée sur ton tel, bois {N}.",
-                "Le joueur qui a payé les dernières courses distribue {N} gorgées.",
-                "Si tu as mangé un fast-food aujourd'hui, bois {N}.",
-                "Si ton prénom commence par une voyelle, prends {N} gorgées.",
-                "Le joueur assis sur le siège le moins confortable boit {N}.",
-                "Si tu portes une ceinture, distribue {N}. Sinon, bois {N}.",
-                "Si tu as un tatouage ou un piercing, prends {N} gorgées.",
-                "Le propriétaire des lieux distribue {N} gorgées.",
-                "Ceux qui ont fêté leur anniversaire au cours des 6 derniers mois boivent {N}.",
-                "Le joueur qui a le plus d'argent en liquide sur lui distribue {N}.",
-                "Ceux qui portent du bleu ou du rouge boivent {N}.",
-                "Si tu as un animal de compagnie chez toi, distribue {N} gorgées.",
-                "Le joueur qui est arrivé le dernier à la soirée prend {N} gorgées.",
-                "Ceux qui préfèrent le rhum au whisky boivent {N}.",
-                "Le plus vieux de la pièce distribue {N}."
+                "Scan des communications : Tous ceux qui possèdent un outil de vape, tabac ou briquet en visuel consomment {N} gorgées.",
+                "Niveau d'énergie critique : Si l'autonomie de ton téléphone est inférieure à 50%, encaisse {N} gorgées.",
+                "Injustice orbitale : {J1}, aucune raison valable. L'ordinateur de bord t'impose {N} gorgées d'office.",
+                "Revêtement sombre : Tous les membres équipés d'un vêtement noir consomment {N} gorgées.",
+                "Technologie IOS : Ceux qui utilisent un iPhone prennent {N} gorgées. Les utilisateurs Android distribuent 2.",
+                "Gabarit de la navette : Le membre le plus grand en taille distribue {N}, le plus petit encaisse la dose.",
+                "Historique des infractions : Si tu as déjà perdu des points sur ton permis de navigation terrestre, bois {N}.",
+                "Composants précieux : Les porteurs de bijoux métalliques (bague, chaîne, montre) consomment {N}.",
+                "Analyse optique : Yeux clairs = encaissez {N} gorgées. Yeux sombres = distribuez {N}.",
+                "Sas d'évacuation : L'officier installé le plus près de la porte de la pièce consomme {N}.",
+                "Type de fluide : Les buveurs de spiritueux purs prennent {N}. Les adeptes de mousse / bière distribuent {N}.",
+                "Activité récente : Le dernier passager à avoir envoyé un message textuel prend {N} gorgées.",
+                "Statut civil spatial : Si tu voles en couple, distribue {N}. Si tu es en dérive solo, bois-les.",
+                "Textile standard : Tous les porteurs de jeans subissent {N} gorgées de pressurisation.",
+                "Isolation thermique : Ceux qui ont les cheveux attachés ou un couvre-chef prennent {N}.",
+                "Séquence de réveil : L'équipier levé le plus tard ce matin distribue {N} gorgées.",
+                "Accès sécurisés : Si ton trousseau comporte plus de 2 clés d'accès, consomme {N}.",
+                "Réseau de communication : Si une application de rencontre est active sur ton terminal, prends {N}.",
+                "Finances spatiales : L'officier qui a réglé le dernier ravitaillement distribue {N} gorgées.",
+                "Alimentation synthétique : Si tu as ingéré de la nourriture de fast-food aujourd'hui, prends {N}.",
+                "Système d'ancrage : Si tu portes une ceinture, distribue {N}. En cas d'absence, bois {N}.",
+                "Modifications corporelles : Les équipiers arborant un tatouage ou un piercing prennent {N}.",
+                "Quotas d'anniversaire : Si ta date de naissance est dans les 6 derniers mois, bois {N}.",
+                "Réserve de crédit : Le passager détenant le plus de monnaie physique distribue {N}.",
+                "Code couleur de vol : Ceux qui arborent du bleu ou du rouge subissent {N} gorgées.",
+                "Dernier contact : Le joueur qui a embrassé quelqu'un en dernier boit {N}."
             ].sort(() => 0.5 - Math.random());
 
-            const deckJeuxEtDefis = [
-                "JEU DU 21 : À partir de {J1}, comptez jusqu'à 21 dans le sens des aiguilles d'une montre (1, 2 ou 3 chiffres max). Celui qui dit '21' prend {N} gorgées.",
-                "BAC À SABLE : À partir de {J1}, citez des marques de voitures. Le premier qui bloque ou répète boit {N}.",
-                "RAPIDITÉ : {J2}, cite 4 rappeurs français en moins de 5 secondes ou prends {N}.",
-                "LE FLINGUE : Au signal, tout le monde mime un pistolet et vise quelqu'un. Si tu es visé par {J1}, tu bois {N} immédiatement.",
-                "PIERRE-FEUILLE-CISEAUX : {J1} fait un chifoumi contre toute la table en même temps. Les perdants prennent {N} gorgées.",
-                "JEU DES ALCOOLS : On tourne. Citez des marques d'alcool fort. Le premier qui sèche prend {N}.",
-                "CHAÎNE DE MOTS : {J1} dit un mot. Le suivant doit enchaîner avec la dernière lettre. Le premier qui bug boit {N}.",
-                "<span class='fun'>DÉFI :</span> {J1}, fais 10 pompes immédiatement ou bois {N2}.",
-                "<span class='fun'>DÉFI :</span> {J1} doit raconter sa pire honte ou son pire râteau, ou boire {N2}.",
-                "<span class='fun'>DUEL :</span> Duel de regards entre {J1} et {J2}. Le premier qui craque ou rigole prend {N} gorgées.",
-                "<span class='fun'>DILEMME :</span> {J1}, soit tu finis ton verre maintenant, soit tu distribues {N2} gorgées à la personne de ton choix.",
-                "<span class='fun'>SÉCURITÉ :</span> {J1} donne son téléphone à {J2} qui lit le dernier message reçu à voix haute. Refus = {N2}."
+            // TIROIR 6 : DUELS ET MINI-JEUX ORBITAUX
+            const deckJeux = [
+                "MINI-JEU - MODULE 21 : À partir de {J1}, comptez jusqu'à 21 en orbite (1, 2 ou 3 chiffres max). L'équipier contraint de prononcer '21' prend {N} gorgées.",
+                "MINI-JEU - BASE DE DONNÉES : À partir de {J1}, énumérez des constructeurs automobiles. Le premier qui sature ou répète prend {N}.",
+                "MINI-JEU - PROPULSION SYNTAXIQUE : {J2}, cite 4 artistes de rap en moins de 5 secondes de chrono sous peine de prendre {N}.",
+                "MINI-JEU - TRAJECTOIRE BALISTIQUE : Au signal, tout le monde arme un pistolet visuel vers une cible. Si tu es visé par {J1}, tu prends {N} immédiatement.",
+                "MINI-JEU - AFFRONTEMENT ALPHA : {J1} lance un chifoumi général contre toute la table. Tous les perdants prennent {N} gorgées.",
+                "MINI-JEU - CARBURANT NOBLE : Rotation de table. Citez des marques de spiritueux (alcools forts). Le premier à court de carburant prend {N}.",
+                "MINI-JEU - CHAÎNE RADIALE : {J1} annonce un mot de bord. Le suivant enchaîne avec la dernière lettre. Le premier bug coûte {N} gorgées."
             ].sort(() => 0.5 - Math.random());
 
+            // TIROIR 7 : MATRICE CUMUL
             const deckCumul = [
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de personnages de <span class='hl'>HARRY POTTER</span> que possible en 30s. DISTRIBUE autant de gorgées que ton score !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de personnages du <span class='hl'>SEIGNEUR DES ANNEAUX</span> que possible en 30s. DISTRIBUE autant de gorgées que ton score !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de marques d'alcool ou bières que possible en 30s. DISTRIBUE autant de gorgées !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de clubs de FOOTBALL européens que possible en 30s. DISTRIBUE ton score !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de POKÉMONS que possible en 30s. DISTRIBUE autant de gorgées !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de films MARVEL ou DC en 30s. DISTRIBUE autant de gorgées !",
-                "<span class='cumul'>CUMUL :</span> {J1}, cite autant de capitales du monde que possible en 30s. DISTRIBUE ton score !"
+                "<span class='cumul'>CALCUL DE CHARGE :</span> {J1}, cite un maximum de personnages de la saga <span class='hl'>STAR WARS</span> en 30s. DISTRIBUE autant de gorgées que ton score !",
+                "<span class='cumul'>CALCUL DE CHARGE :</span> {J1}, cite un maximum de super-héros en 30s. DISTRIBUE ton score !",
+                "<span class='cumul'>CALCUL DE CHARGE :</span> {J1}, énumère autant de marques de bière que possible en 30s. DISTRIBUE la puissance de ton score !",
+                "<span class='cumul'>CALCUL DE CHARGE :</span> {J1}, cite un maximum de marques de voitures de sport en 30s. DISTRIBUE ton score à l'équipage.",
+                "<span class='cumul'>CALCUL DE CHARGE :</span> {J1}, énumère un maximum de pays de l'espace européen en 30s. DISTRIBUE autant de gorgées !"
             ].sort(() => 0.5 - Math.random());
 
             const culSecs = [
-                "FATALITÉ : {J1}, <span class='cul-sec'>CUL SEC !</span>", 
-                "DÉLUGE : {J2}, <span class='cul-sec'>CUL SEC !</span>"
+                "AVARIE MAJEURE : {J1}, <span class='cul-sec'>EJECTER LE RÉSERVOIR (CUL SEC) !</span>", 
+                "CRASH COCKPIT : {J2}, <span class='cul-sec'>EJECTER LE RÉSERVOIR (CUL SEC) !</span>"
             ];
 
+            // CADENÇAGE SÉQUENTIEL DES TIROIRS (Zéro répétition possible d'un même type)
             let selection = [];
             while (selection.length < (totalCardsInGame - 1)) {
                 if (deckDirectes.length > 0) selection.push(deckDirectes.pop());
@@ -185,13 +265,16 @@
                 if (deckSauce.length > 0) selection.push(deckSauce.pop());
                 if (selection.length >= (totalCardsInGame - 1)) break;
                 
-                if (deckJeuxEtDefis.length > 0) selection.push(deckJeuxEtDefis.pop());
+                if (deckDilemmes.length > 0) selection.push(deckDilemmes.pop());
                 if (selection.length >= (totalCardsInGame - 1)) break;
                 
-                if (deckShooters.length > 0 && Math.random() > 0.3) selection.push(deckShooters.pop());
+                if (deckJeux.length > 0) selection.push(deckJeux.pop());
+                if (selection.length >= (totalCardsInGame - 1)) break;
+                
+                if (deckShooters.length > 0 && Math.random() > 0.25) selection.push(deckShooters.pop());
                 if (selection.length >= (totalCardsInGame - 1)) break;
 
-                if (deckRegles.length > 0 && Math.random() > 0.4) selection.push(deckRegles.pop());
+                if (deckRegles.length > 0 && Math.random() > 0.35) selection.push(deckRegles.pop());
                 if (selection.length >= (totalCardsInGame - 1)) break;
 
                 if (deckCumul.length > 0 && Math.random() > 0.5) selection.push(deckCumul.pop());
@@ -211,12 +294,12 @@
 
         function draw() {
             if(step >= totalCardsInGame) {
-                document.getElementById('content').innerHTML = "🏁 ARCHIVE TERMINÉE.<br><br><button onclick='location.reload()'>RELANCER UN MIX ENTIÈREMENT NOUVEAU</button>";
-                document.getElementById('count').innerText = totalCardsInGame + " / " + totalCardsInGame;
+                document.getElementById('content').innerHTML = "🏁 FIN DE MISSION. NAVETTE ARRIVÉE À DESTINATION.<br><br><button onclick='location.reload()'>RELANCER UNE TRAJECTOIRE</button>";
+                document.getElementById('count').innerText = "MISSION ACCOMPLISHED";
                 return;
             }
             let p = [...players].sort(() => 0.5 - Math.random());
-            let n = Math.floor(Math.random() * 5) + 2; 
+            let n = Math.floor(Math.random() * 4) + 2; 
             
             let raw = finalDeck[step];
             let processed = raw.replace(/{J1}/g, '<span class="hl">'+p[0]+'</span>')
@@ -225,7 +308,7 @@
                                .replace(/{N}/g, '<span class="num">'+n+'</span>')
                                .replace(/{N2}/g, '<span class="num">'+(n*2)+'</span>');
             document.getElementById('content').innerHTML = processed;
-            document.getElementById('count').innerText = (step + 1) + " / " + totalCardsInGame;
+            document.getElementById('count').innerText = "VRAI ORBITAL : T-" + (step + 1) + " / " + totalCardsInGame;
             step++;
         }
     </script>
